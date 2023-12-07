@@ -24,32 +24,38 @@ STRAIGHT_BACKWARD = 7
 
 
 while True:
-    # print(joystick_y.read_u16(), joystick_x.read_u16())
-    x = joystick_x.read_u16()
-    y = joystick_y.read_u16()
+
+    x_val = joystick_x.read_u16()
+    y_val = joystick_y.read_u16()
     
-    x_still = is_still(joystick_x.read_u16())
-    y_still = is_still(joystick_y.read_u16())
+    x_still = is_still(x_val)
+    y_still = is_still(y_val)
+    
+    x_increase = increase(x_val)
+    y_increase = increase(y_val)
+    
+    x_decrease = decrease(x_val)
+    y_decrease = decrease(y_val)
     
     if x_still and y_still:
         print(STOP)
         
-    if increase(y) and x_still:
+    if y_increase and x_still:
         print(STRAIGHT_FORWARD)
         
-    if decrease(y) and x_still:
+    if y_decrease and x_still:
         print(STRAIGHT_BACKWARD)
         
-    if increase(y) and increase(x):
+    if y_increase and x_increase:
         print(LEFT_FORWARD)
         
-    if increase(y) and decrease(x):
+    if y_increase and x_decrease:
         print(RIGHT_FORWARD)
         
-    if decrease(y) and increase(x):
+    if y_decrease and x_increase:
         print(LEFT_BACKWARD)
         
-    if decrease(y) and decrease(x):
+    if y_decrease and x_decrease:
         print(RIGHT_BACKWARD)
         
     time.sleep(0.1)
