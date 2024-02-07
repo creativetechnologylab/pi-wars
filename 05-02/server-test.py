@@ -1,12 +1,12 @@
-from machine import Pin, ADC
-import network
 import random
 import socket
 import time
 
+import network
+from machine import ADC, Pin
 
-ssid = 'Igloo'
-password = '1glooVision'
+ssid = "Igloo"
+password = "1glooVision"
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -15,27 +15,27 @@ wlan.connect(ssid, password)
 # Wait for connect or fail
 max_wait = 10
 while max_wait > 0:
-  if wlan.status() < 0 or wlan.status() >= 3:
-    break
-  max_wait -= 1
-  print('waiting for connection...')
-  time.sleep(1)
+    if wlan.status() < 0 or wlan.status() >= 3:
+        break
+    max_wait -= 1
+    print("waiting for connection...")
+    time.sleep(1)
 # Handle connection error
 if wlan.status() != 3:
-   raise RuntimeError('network connection failed')
+    raise RuntimeError("network connection failed")
 else:
-  print('connected')
-  status = wlan.ifconfig()
-  #print('ip = ' + status[0])
+    print("connected")
+    status = wlan.ifconfig()
+    # print('ip = ' + status[0])
 
 # Open socket
-addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
+addr = socket.getaddrinfo("0.0.0.0", 80)[0][-1]
 
 s = socket.socket()
 s.bind(addr)
 s.listen(1)
 
-print('listening on', addr)
+print("listening on", addr)
 
 # Listen for connections
 while True:
@@ -51,4 +51,4 @@ while True:
 
     except OSError as e:
         cl.close()
-        print('connection closed')
+        print("connection closed")

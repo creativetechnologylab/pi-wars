@@ -1,8 +1,9 @@
-from machine import Pin, ADC
-import network
 import random
 import socket
 import time
+
+import network
+from machine import ADC, Pin
 
 motor1a = Pin(14, Pin.OUT)
 motor1b = Pin(15, Pin.OUT)

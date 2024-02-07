@@ -1,7 +1,8 @@
-from machine import Pin, ADC
-import time
-import network
 import socket
+import time
+
+import network
+from machine import ADC, Pin
 
 HIGH = 35000
 LOW = 30000
@@ -63,9 +64,7 @@ s.listen(1)
 print("listening on", addr)
 
 while True:
-
     try:
-
         cl, addr = s.accept()
         request = cl.recv(1024)
         print("request", request)
