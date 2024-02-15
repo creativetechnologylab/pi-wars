@@ -22,6 +22,7 @@ def decrease(val):
 
 joystick_y = ADC(Pin(26))
 joystick_x = ADC(Pin(27))
+led = Pin("LED", Pin.OUT)
 
 STOP = 1
 STRAIGHT_FORWARD = 2
@@ -31,8 +32,8 @@ RIGHT_BACKWARD = 5
 LEFT_BACKWARD = 6
 STRAIGHT_BACKWARD = 7
 
-ssid = "Igloo"
-password = "1glooVision"
+ssid = "TP-Link_ABDD"
+password = "65298190"
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -52,7 +53,9 @@ if wlan.status() != 3:
 else:
     print("connected")
     status = wlan.ifconfig()
-    # print('ip = ' + status[0])
+    print('ip = ' + status[0])
+    led.on()
+    
 
 # Open socket
 addr = socket.getaddrinfo("0.0.0.0", 80)[0][-1]

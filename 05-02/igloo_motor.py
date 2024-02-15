@@ -11,8 +11,10 @@ motor1b = Pin(15, Pin.OUT)
 motor2a = Pin(10, Pin.OUT)
 motor2b = Pin(11, Pin.OUT)
 
-ssid = "Igloo"
-password = "1glooVision"
+led = Pin("LED", Pin.OUT)
+
+ssid = "TP-Link_ABDD"
+password = "65298190"
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
@@ -32,7 +34,8 @@ if wlan.status() != 3:
 else:
     print("connected")
     status = wlan.ifconfig()
-    # print('ip = ' + status[0])
+    print('ip = ' + status[0])
+    led.on()
 
 
 def right_forward():
@@ -95,7 +98,7 @@ commands = {
 }
 
 while True:
-    ai = socket.getaddrinfo("192.168.1.115", 80)  # Address of Web Server
+    ai = socket.getaddrinfo("192.168.0.100", 80)  # Address of Web Server
     addr = ai[0][-1]
 
     # Create a socket and make a HTTP request
